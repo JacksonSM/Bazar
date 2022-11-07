@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazar.Domain", "src\Bazar.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazar.View", "src\Bazar.View\Bazar.View.csproj", "{E43B8D0C-17F4-493B-8C9D-504B4B21D41B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazar.Infrastructure", "src\Bazar.Infrastructure\Bazar.Infrastructure.csproj", "{C8A685BA-4055-45C3-B089-36D403AEB1FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,18 @@ Global
 		{E43B8D0C-17F4-493B-8C9D-504B4B21D41B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E43B8D0C-17F4-493B-8C9D-504B4B21D41B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E43B8D0C-17F4-493B-8C9D-504B4B21D41B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8A685BA-4055-45C3-B089-36D403AEB1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A685BA-4055-45C3-B089-36D403AEB1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A685BA-4055-45C3-B089-36D403AEB1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A685BA-4055-45C3-B089-36D403AEB1FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4A588E35-7E10-4A40-886B-932D1D89CE0A} = {F198DC76-6B37-4461-AB91-A67EFBD89358}
+		{E43B8D0C-17F4-493B-8C9D-504B4B21D41B} = {F198DC76-6B37-4461-AB91-A67EFBD89358}
+		{C8A685BA-4055-45C3-B089-36D403AEB1FC} = {F198DC76-6B37-4461-AB91-A67EFBD89358}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {506C91D9-14C7-4C41-B43F-AC0347774A62}
