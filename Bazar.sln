@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F198DC76-6B3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazar.Domain", "src\Bazar.Domain\Bazar.Domain.csproj", "{4A588E35-7E10-4A40-886B-932D1D89CE0A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazar.View", "src\Bazar.View\Bazar.View.csproj", "{7E83541B-A7C1-46C1-8D58-59BD1BD8CA5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazar.View", "src\Bazar.View\Bazar.View.csproj", "{E43B8D0C-17F4-493B-8C9D-504B4B21D41B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,17 +19,16 @@ Global
 		{4A588E35-7E10-4A40-886B-932D1D89CE0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A588E35-7E10-4A40-886B-932D1D89CE0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A588E35-7E10-4A40-886B-932D1D89CE0A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E83541B-A7C1-46C1-8D58-59BD1BD8CA5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E83541B-A7C1-46C1-8D58-59BD1BD8CA5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E83541B-A7C1-46C1-8D58-59BD1BD8CA5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E83541B-A7C1-46C1-8D58-59BD1BD8CA5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E43B8D0C-17F4-493B-8C9D-504B4B21D41B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E43B8D0C-17F4-493B-8C9D-504B4B21D41B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E43B8D0C-17F4-493B-8C9D-504B4B21D41B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E43B8D0C-17F4-493B-8C9D-504B4B21D41B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4A588E35-7E10-4A40-886B-932D1D89CE0A} = {F198DC76-6B37-4461-AB91-A67EFBD89358}
-		{7E83541B-A7C1-46C1-8D58-59BD1BD8CA5B} = {F198DC76-6B37-4461-AB91-A67EFBD89358}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {506C91D9-14C7-4C41-B43F-AC0347774A62}
