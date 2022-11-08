@@ -8,5 +8,8 @@ public class AnuncioMap : IEntityTypeConfiguration<Anuncio>
     public void Configure(EntityTypeBuilder<Anuncio> builder)
     {
         builder.HasKey(x => x.Id);
+
+        builder.Property(x => x.Imagens)
+               .IsRequired(false);
     }
 }

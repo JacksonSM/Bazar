@@ -3,6 +3,7 @@ using System;
 using Bazar.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bazar.Infrastructure.Migrations
 {
     [DbContext(typeof(BazarDbContext))]
-    partial class BazarDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221108130933_AdicionadoColunaImagemPrincipalEmAnuncio")]
+    partial class AdicionadoColunaImagemPrincipalEmAnuncio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.10");

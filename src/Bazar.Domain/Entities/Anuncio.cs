@@ -10,14 +10,24 @@ public class Anuncio : BaseEntity
     public decimal Preco { get; private set; }
     public bool Ativo { get; private set; }
 
+    public string ImagemPrincipal { get; private set; } 
     public string Imagens { get; private set; } 
 
 
     public Anuncio(){}//Para EF
 
-    public Anuncio(string titulo, string descricao, int tempoUso, string cidade, decimal preco)
+    public Anuncio(string titulo, string descricao, int tempoUso,
+        string cidade, decimal preco, string imagemPrincipal, string imagens)
     {
         Validar(titulo, descricao, tempoUso, cidade ,preco);
+
+        Titulo = titulo;
+        Descricao = descricao;
+        TempoUso = tempoUso;
+        Cidade = cidade;
+        Preco = preco;
+        ImagemPrincipal = imagemPrincipal;
+        Imagens = imagens;
         Ativo = true;
     }
 
@@ -36,11 +46,5 @@ public class Anuncio : BaseEntity
         DomainExceptionValidation.Quando(preco < 0, "Preço não pode ser negativo.");
 
         DomainExceptionValidation.Quando(tempoUso < 0, "Tempo de uso não pode ser negativo.");
-
-        Titulo = titulo;
-        Descricao = descricao;
-        TempoUso = tempoUso;
-        Cidade = cidade;
-        Preco = preco;
     }
 }
