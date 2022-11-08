@@ -4,7 +4,7 @@ namespace Bazar.View.Tools.Imagens;
 
 public class GerenciadorImagens
 {
-    private readonly string[] EXTENSAO_PERMITIDOS = { ".jpeg" };
+    private readonly string[] EXTENSAO_PERMITIDOS = { ".jpg" };
     private readonly UnitOfUpload _upload;
     private readonly IWebHostEnvironment _webHostEnvironment;
     public GerenciadorImagens(UnitOfUpload upload, IWebHostEnvironment webHostEnvironment)
@@ -29,7 +29,7 @@ public class GerenciadorImagens
 
     public string SalvarImagem(IFormFile imagem)
     {
-        Validar(imagem.FileName);
+        Validar(imagem);
         var nomeImagem = Guid.NewGuid().ToString();
         _upload.CarregarImagem(imagem, nomeImagem);
         return nomeImagem + Path.GetExtension(imagem.FileName);
@@ -37,7 +37,7 @@ public class GerenciadorImagens
 
     public List<string> SalvarImagem(IFormFileCollection imagens)
     {
-        Validar(imagens.Select(c => c.FileName).ToArray());
+        Validar(imagens);
 
         var nomesImagens = new List<string>();
 
@@ -48,15 +48,18 @@ public class GerenciadorImagens
         return nomesImagens;
     }
 
-    private void Validar(string fileName)
+    private void Validar(IFormFile file)
     {
-        if (!EXTENSAO_PERMITIDOS.Contains(Path.GetExtension(fileName)))
+        if(file.Length > 1024)
+            throw new FileLoadException("Tamanho maximo de uma imagem é 1MB.", file.FileName);
+
+        if (!EXTENSAO_PERMITIDOS.Contains(Path.GetExtension(file.FileName)))
                 throw new FormatException("Apenas formatos jpeg são permitidos.");
     }
 
-    private void Validar(string[] fileNames)
+    private void Validar(IFormFileCollection imagens)
     {
-        foreach (var fileName in fileNames)
+        foreach (var fileName in imagens)
         {
             Validar(fileName);
         }

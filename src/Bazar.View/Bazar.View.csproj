@@ -11,11 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bazar.Application\Bazar.Application.csproj" />
     <ProjectReference Include="..\Bazar.Infrastructure\Bazar.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Database\" />
+    <Folder Include="wwwroot\uploads\imagens_produtos\" />
   </ItemGroup>
 
 </Project>

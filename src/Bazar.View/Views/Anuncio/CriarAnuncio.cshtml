@@ -1,4 +1,4 @@
-﻿@model Bazar.View.Models.AnuncioViewModel
+﻿@model Bazar.Application.ViewModel.AnuncioViewModel
 
 <h4>Criando um anuncio...</h4>
 <hr />
@@ -40,13 +40,13 @@
             <div class="form-group">
                 <label class="control-label">Selecione uma Imagem Principal</label>
                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                <input type="file" name="imagemPrincipal" class="form-control" required placeholder="Selecione uma Imagem Principal..." />
+                <input type="file" name="imagemPrincipal" class="form-control" accept="image/jpeg" required placeholder="Selecione uma Imagem Principal..." />
             </div>
 
             <div class="form-group">
                 <label class="control-label">Adicione as demais imagens</label>
                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                <input type="file" name="imagensSegundaria" class="form-control" multiple required placeholder="Selecione as Imagens Segundaria" />
+                <input type="file" name="imagensSegundaria" class="form-control" accept="image/jpeg" multiple required placeholder="Selecione as Imagens Segundaria" />
             </div>
 
             <div class="form-group">
