@@ -5,6 +5,7 @@ namespace Bazar.View.Tools.Imagens;
 public class GerenciadorImagens
 {
     private readonly string[] EXTENSAO_PERMITIDOS = { ".jpg" };
+    private const long LIMITE_MAXIMO_MB = 1000000;
     private readonly UnitOfUpload _upload;
     private readonly IWebHostEnvironment _webHostEnvironment;
     public GerenciadorImagens(UnitOfUpload upload, IWebHostEnvironment webHostEnvironment)
@@ -50,7 +51,8 @@ public class GerenciadorImagens
 
     private void Validar(IFormFile file)
     {
-        if(file.Length > 1024)
+
+        if(file.Length > LIMITE_MAXIMO_MB)
             throw new FileLoadException("Tamanho maximo de uma imagem é 1MB.", file.FileName);
 
         if (!EXTENSAO_PERMITIDOS.Contains(Path.GetExtension(file.FileName)))

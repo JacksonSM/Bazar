@@ -1,4 +1,4 @@
-﻿using Bazar.Application.ViewModel;
+﻿using Bazar.Application.UseCase.Anuncio.Obter;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bazar.View.Controllers;
@@ -9,9 +9,9 @@ public class HomeController : Controller
     {
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index([FromServices] IObterAnuncioUseCase useCase)
     {
-        return View(new List<AnuncioViewModel>());
+        return View(await useCase.GetAllAsync());
     }
 
     public IActionResult Privacy()

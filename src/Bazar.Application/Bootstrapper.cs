@@ -1,5 +1,6 @@
 ﻿using Bazar.Application.Services.Mappings;
 using Bazar.Application.UseCase.Anuncio.Criar;
+using Bazar.Application.UseCase.Anuncio.Obter;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bazar.Application;
@@ -18,6 +19,7 @@ public static class Bootstrapper
 
     private static void AddUseCases(IServiceCollection services)
     {
-        services.AddScoped<ICriarAnuncioUseCase, CriarAnuncioUseCase>();
+        services.AddScoped<ICriarAnuncioUseCase, CriarAnuncioUseCase>()
+                .AddScoped<IObterAnuncioUseCase, ObterAnuncioUseCase>();
     }
 }
