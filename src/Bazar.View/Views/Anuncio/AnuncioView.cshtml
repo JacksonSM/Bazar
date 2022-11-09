@@ -28,12 +28,17 @@
             <label for="slide(@x)"></label>
             <img src="@imagensPath[x]" />
         </li>
+        
     }
 </ul>
 
-<p>@Model.Titulo</p>
-<p>@Model.Descricao</p>
-<p>@Model.TempoUso</p>
-<p>@Model.Preco</p>
-<p>@Model.Cidade</p>
+<div class="anuncio-info">
+    <h1>@Model.Titulo</h1>
+    <p id="preco-view">@Html.DisplayFor(modelItem => @Model.Preco)</p>
+    <h2>Descrição:</h2>
+    <p>@Model.Descricao</p>
+    <p id="cidade_view">Cidade: @Model.Cidade</p>
+    <p id="tempouso_view">@Model.TempoUso meses de uso.</p>
+</div>
+
 
