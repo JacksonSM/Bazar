@@ -10,9 +10,9 @@ public class UnitOfUpload
         _webHostEnvironment = webHostEnvironment;
     }
 
-    public async void CarregarImagem(IFormFile file, string codigo)
+    public async void CarregarImagem(string path, IFormFile file, string codigo)
     {
-        await CarregarImagem(file, codigo, "\\uploads\\imagens_produtos\\");
+        await CarregarImagem(file, codigo, path);
     }
 
     public async Task CarregarImagem(IFormFile file, string nomeImagem, string path)

@@ -21,4 +21,7 @@ public class AnuncioRepository : IAnuncioRepository
 
     public async Task<IEnumerable<Anuncio>> GetAllAsync() =>
         await _context.Anuncios.AsNoTracking().ToListAsync();
+
+    public async Task<Anuncio> GetByIdAsync(int id) =>
+        await _context.Anuncios.FirstOrDefaultAsync(x => x.Id == id);
 }

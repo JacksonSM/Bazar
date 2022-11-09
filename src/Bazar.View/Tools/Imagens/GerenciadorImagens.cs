@@ -4,10 +4,13 @@ namespace Bazar.View.Tools.Imagens;
 
 public class GerenciadorImagens
 {
-    private readonly string[] EXTENSAO_PERMITIDOS = { ".jpg" };
-    private const long LIMITE_MAXIMO_MB = 1000000;
     private readonly UnitOfUpload _upload;
     private readonly IWebHostEnvironment _webHostEnvironment;
+
+    private readonly string[] EXTENSAO_PERMITIDOS = { ".jpg", ".jpeg" };
+    private const string CAMINHO_IMAGEM = "\\uploads\\imagens_produtos\\";
+    private const long LIMITE_MAXIMO_MB = 1000000;
+
     public GerenciadorImagens(UnitOfUpload upload, IWebHostEnvironment webHostEnvironment)
     {
         _upload = upload;
@@ -32,7 +35,7 @@ public class GerenciadorImagens
     {
         Validar(imagem);
         var nomeImagem = Guid.NewGuid().ToString();
-        _upload.CarregarImagem(imagem, nomeImagem);
+        _upload.CarregarImagem(CAMINHO_IMAGEM, imagem, nomeImagem);
         return nomeImagem + Path.GetExtension(imagem.FileName);
     }
 
@@ -47,6 +50,11 @@ public class GerenciadorImagens
             nomesImagens.Add(SalvarImagem(imagem));
         }
         return nomesImagens;
+    }
+
+    public string ObterCaminhoImagem(string fileName)
+    {
+        return Path.Combine(CAMINHO_IMAGEM, fileName);
     }
 
     private void Validar(IFormFile file)

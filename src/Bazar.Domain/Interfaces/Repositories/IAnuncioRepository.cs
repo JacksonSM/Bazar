@@ -5,4 +5,5 @@ public interface IAnuncioRepository
 {
     Task<Anuncio> Add(Anuncio anuncio);
     Task<IEnumerable<Anuncio>> GetAllAsync();
+    Task<Anuncio> GetByIdAsync(int id);
 }

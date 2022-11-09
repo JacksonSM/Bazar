@@ -1,0 +1,39 @@
+﻿@using Bazar.View.Tools.Imagens
+
+@model Bazar.Application.ViewModel.AnuncioViewModel
+@inject GerenciadorImagens _gerirImagem
+
+@{
+    var nomeImagensSegundaria = Model.ObterImagens();
+    List<string> imagensPath = new();
+
+    foreach (var nome in nomeImagensSegundaria)
+    {
+        imagensPath.Add(_gerirImagem.ObterCaminhoImagem(nome));
+    }
+}
+
+
+
+<ul class="slider">
+    <li>
+        <input type="radio" id="slide1" name="slide" checked>
+        <label for="slide1"></label>
+        <img src="@_gerirImagem.ObterCaminhoImagem(@Model.ImagemPrincipal)" />
+    </li>
+    @for (int x = 0; x < imagensPath.Count; x++)
+    {
+        <li>
+            <input type="radio" id="slide(@x)" name="slide">
+            <label for="slide(@x)"></label>
+            <img src="@imagensPath[x]" />
+        </li>
+    }
+</ul>
+
+<p>@Model.Titulo</p>
+<p>@Model.Descricao</p>
+<p>@Model.TempoUso</p>
+<p>@Model.Preco</p>
+<p>@Model.Cidade</p>
+

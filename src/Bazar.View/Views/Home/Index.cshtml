@@ -1,54 +1,26 @@
-﻿@model IEnumerable<Bazar.Application.ViewModel.AnuncioViewModel>
+﻿@using Bazar.View.Tools.Imagens
+
+@model IEnumerable<Bazar.Application.ViewModel.AnuncioViewModel>
+@inject GerenciadorImagens _gerirImagem 
 
 <p>
     <a asp-controller="Anuncio" asp-action="CriarAnuncio">Anuncie AQUI!</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TempoUso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Preco)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
 
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TempoUso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Preco)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+</p>
+
+<ol>
+    @foreach (var anuncio in @Model)
+    {
+        <li class="anuncio">
+            <div class="wrapper-anuncio">
+                <div class="divide-img-descricao">
+                    <div class="imagem"><img src="@_gerirImagem.ObterCaminhoImagem(anuncio.ImagemPrincipal)"></div>
+                    <div class="descricao">
+                        <h1 id="titulo"> <a asp-controller="Anuncio" asp-action="AnuncioView" asp-route-anuncioId="@anuncio.Id">@anuncio.Titulo</a></h1>
+                        <p id="preco"> @Html.DisplayFor(modelItem => anuncio.Preco)</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+</ol>

@@ -1,4 +1,5 @@
 ﻿using Bazar.Application.UseCase.Anuncio.Criar;
+using Bazar.Application.UseCase.Anuncio.Obter;
 using Bazar.Application.ViewModel;
 using Bazar.Domain.Validation;
 using Bazar.View.Tools.Imagens;
@@ -33,20 +34,33 @@ public class AnuncioController : Controller
             }
             catch(Exception e) 
             {
-
-                ModelState.AddModelError(string.Empty, e.Message);
-                return View(anuncioVM);
-            }
-            finally
-            {
                 if (anuncioVM.Imagens is not null && anuncioVM.ImagemPrincipal is not null)
                 {
                     var imagens = anuncioVM.Imagens.Split(",").ToList();
                     imagens.Add(anuncioVM.ImagemPrincipal);
                     gerirImagens.ExcluirImagem(imagens.ToArray());
                 }
+
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(anuncioVM);
             }
+
         }
         return RedirectToAction("Index","Home");
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> AnuncioView(
+        int anuncioId,
+        [FromServices] IObterAnuncioUseCase useCase,
+        [FromServices] GerenciadorImagens gerirImagens)
+    {
+        var anuncio = await useCase.GetByIdAsync(anuncioId);
+
+        if (anuncio is null)
+            return NotFound();
+
+        return View(anuncio);
     }
 }

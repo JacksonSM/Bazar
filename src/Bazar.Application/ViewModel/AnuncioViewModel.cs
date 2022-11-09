@@ -5,6 +5,8 @@ namespace Bazar.Application.ViewModel;
 
 public class AnuncioViewModel
 {
+    public int? Id { get; set; }
+
     [DisplayName(displayName: "Título")]
     [Required(ErrorMessage = "Campo {0} é requerido.")]
     public string Titulo { get; set; }
@@ -28,4 +30,8 @@ public class AnuncioViewModel
     public string? ImagemPrincipal { get; set; }
     public string? Imagens { get; set; }
 
+    public string[] ObterImagens()
+    {
+        return Imagens.Split(",");
+    }
 }
