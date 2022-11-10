@@ -3,12 +3,14 @@ using Bazar.Application.UseCase.Anuncio.Obter;
 using Bazar.Application.ViewModel;
 using Bazar.Domain.Validation;
 using Bazar.View.Tools.Imagens;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bazar.View.Controllers;
 public class AnuncioController : Controller
 {
     [HttpGet]
+    [Authorize]
     public IActionResult CriarAnuncio()
     {
         return View();
@@ -16,6 +18,7 @@ public class AnuncioController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize]
     public async Task<IActionResult> CriarAnuncio(
         IFormFile imagemPrincipal,
         IFormFileCollection imagensSegundaria,

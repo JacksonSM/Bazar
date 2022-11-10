@@ -55,3 +55,11 @@ img {
 .form-group {
     margin-top: 20px;
 }
+
+.form-floating {
+    margin: 30px 0;
+}
+
+#registerSubmit {
+    margin-top: 30px;
+}

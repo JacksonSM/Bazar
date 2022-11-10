@@ -26,7 +26,10 @@ public static class Bootstrapper
         services.AddDbContext<BazarDbContext>(options =>
             options.UseSqlite(connectionString));
 
-        services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>()
+        services.AddDefaultIdentity<ApplicationUser>(opt =>
+        {
+            opt.User.RequireUniqueEmail = true;
+        }).AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<BazarDbContext>();
     }
 
