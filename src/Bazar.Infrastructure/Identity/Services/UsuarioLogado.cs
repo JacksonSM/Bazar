@@ -29,6 +29,12 @@ public class UsuarioLogado : IUsuarioLogado
         return usuarioLogado.NomeCompleto;
     }
 
+    public async Task<string> ObterUsuarioTelefoneAsync()
+    {
+        var usuarioLogado = await ObterUsuarioLogado();
+        return usuarioLogado.PhoneNumber;
+    }
+
     private async Task<ApplicationUser> ObterUsuarioLogado()
     {
         return await _userManager.GetUserAsync(_signInManager.Context.User);

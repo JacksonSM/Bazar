@@ -14,15 +14,16 @@ public class Anuncio : BaseEntity
     public string Imagens { get; private set; }
 
     public string NomeAnunciante { get; set; }
+    public string TelefoneAnunciante { get; set; }
     public string AnuncianteId { get; set; }
 
     public Anuncio(){}//Para EF
 
     public Anuncio(string titulo, string descricao, int tempoUso,
         string cidade, decimal preco, string imagemPrincipal, string imagens,
-        string nomeAnunciante, string anuncianteId)
+        string nomeAnunciante, string anuncianteId, string telefoneAnunciante)
     {
-        Validar(titulo, descricao, tempoUso, cidade ,preco);
+        Validar(titulo, descricao, tempoUso, cidade, preco);
 
         Titulo = titulo;
         Descricao = descricao;
@@ -31,9 +32,10 @@ public class Anuncio : BaseEntity
         Preco = preco;
         ImagemPrincipal = imagemPrincipal;
         Imagens = imagens;
-        NomeAnunciante= nomeAnunciante;
+        NomeAnunciante = nomeAnunciante;
         AnuncianteId = anuncianteId;
         Ativo = true;
+        TelefoneAnunciante = telefoneAnunciante;
     }
 
     public void Validar(string titulo, string descricao, int tempoUso,

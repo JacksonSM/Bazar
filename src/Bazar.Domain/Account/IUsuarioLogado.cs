@@ -4,4 +4,5 @@ public interface IUsuarioLogado
     bool IsAutenticado();
     string ObterUsuarioId();
     Task<string> ObterUsuarioNomeCompletoAsync();
+    Task<string> ObterUsuarioTelefoneAsync();
 }

@@ -28,6 +28,7 @@ public class CriarAnuncioUseCase : ICriarAnuncioUseCase
     {
         string nomeCompletoUsuarioLogado = await _usuarioLogado.ObterUsuarioNomeCompletoAsync();
         string idUsuarioLogado = _usuarioLogado.ObterUsuarioId();
+        string telefoneUsuarioLogado = await _usuarioLogado.ObterUsuarioTelefoneAsync();
 
         var anuncioEntity = new Domain.Entities.Anuncio
             (
@@ -39,7 +40,8 @@ public class CriarAnuncioUseCase : ICriarAnuncioUseCase
                 imagemPrincipal: model.ImagemPrincipal,
                 imagens: model.Imagens,
                 nomeAnunciante: nomeCompletoUsuarioLogado,
-                anuncianteId: idUsuarioLogado
+                anuncianteId: idUsuarioLogado,
+                telefoneAnunciante: telefoneUsuarioLogado
             );
 
         await _anuncioRepo.Add(anuncioEntity);
