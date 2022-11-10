@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Bazar.Domain.Account;
+using Bazar.Infrastructure.Identity.Services;
 
 namespace Bazar.Infrastructure;
 public static class Bootstrapper
@@ -15,7 +17,7 @@ public static class Bootstrapper
     {
         AddContext(services, configuration);
         AddRepositories(services);
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        AddIdentity(services);
     }
 
 
@@ -26,16 +28,23 @@ public static class Bootstrapper
         services.AddDbContext<BazarDbContext>(options =>
             options.UseSqlite(connectionString));
 
+    }
+    private static void AddIdentity(IServiceCollection services)
+    {
         services.AddDefaultIdentity<ApplicationUser>(opt =>
         {
             opt.User.RequireUniqueEmail = true;
         }).AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<BazarDbContext>();
+
+        services.AddScoped<IUsuarioLogado, UsuarioLogado>();
     }
 
     private static void AddRepositories(IServiceCollection services)
     {
         services.AddScoped<IAnuncioRepository, AnuncioRepository>();
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 
 }

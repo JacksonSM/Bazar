@@ -11,5 +11,11 @@ public class AnuncioMap : IEntityTypeConfiguration<Anuncio>
 
         builder.Property(x => x.Imagens)
                .IsRequired(false);
+
+        builder.Property(x => x.AnuncianteId)
+               .IsRequired();
+
+        builder.Property(x => x.NomeAnunciante)
+                .IsRequired();
     }
 }
