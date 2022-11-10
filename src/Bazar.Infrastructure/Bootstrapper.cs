@@ -1,8 +1,10 @@
 ﻿using Bazar.Domain.Interfaces;
 using Bazar.Domain.Interfaces.Repositories;
 using Bazar.Infrastructure.Context;
+using Bazar.Infrastructure.Identity;
 using Bazar.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +25,9 @@ public static class Bootstrapper
 
         services.AddDbContext<BazarDbContext>(options =>
             options.UseSqlite(connectionString));
+
+        services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<BazarDbContext>();
     }
 
     private static void AddRepositories(IServiceCollection services)
