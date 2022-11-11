@@ -32,10 +32,11 @@ public class AnuncioRepository : IAnuncioRepository
             query.Where(x => x.Cidade.ToLower().Contains(cidade.ToLower()));
 
         if (!(paginaAtual.HasValue && itensPorPagina.HasValue))    
-            return (await query.ToListAsync(), query.Count());
+            return (await query.Where(x => x.Ativo == true).ToListAsync(), query.Count());
         
 
         var anuncios = await query.AsNoTracking()
+                                  .Where(x => x.Ativo == true)
                                   .Skip((paginaAtual.Value - 1) * itensPorPagina.Value)
                                   .Take(itensPorPagina.Value)
                                   .ToListAsync();
@@ -50,6 +51,11 @@ public class AnuncioRepository : IAnuncioRepository
     {
         return await _context.Anuncios
             .AsNoTracking()
-            .Where(x => x.AnuncianteId.Equals(usuarioId)).ToListAsync();
+            .Where(x => x.AnuncianteId.Equals(usuarioId) && x.Ativo == true).ToListAsync();
+    }
+
+    public void Update(Anuncio anuncio)
+    {
+        _context.Anuncios.Update(anuncio);
     }
 }

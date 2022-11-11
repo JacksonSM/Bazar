@@ -54,4 +54,9 @@ public class Anuncio : BaseEntity
 
         DomainExceptionValidation.Quando(tempoUso < 0, "Tempo de uso não pode ser negativo.");
     }
+
+    public void DesativarAnuncio()
+    {
+        Ativo = false;
+    }
 }

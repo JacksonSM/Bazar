@@ -1,7 +1,6 @@
 ﻿using Bazar.Application.UseCase.Anuncio.Criar;
 using Bazar.Application.UseCase.Anuncio.Obter;
 using Bazar.Application.ViewModel;
-using Bazar.Domain.Validation;
 using Bazar.View.Tools.Imagens;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +17,8 @@ public class AnuncioController : Controller
     }
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
     [Authorize]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> CriarAnuncio(
         IFormFile imagemPrincipal,
         IFormFileCollection imagensSegundaria,
@@ -83,4 +82,14 @@ public class AnuncioController : Controller
         return View(anuncio);
     }
 
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> DeletarAnuncio(
+        int id,
+        [FromServices] ICriarAnuncioUseCase service)
+    {
+        await service.DeletarAnuncioAsync(id, User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+        return RedirectToAction(nameof(MeusAnuncios));
+    }
 }
