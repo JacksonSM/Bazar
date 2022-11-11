@@ -10,19 +10,22 @@ public class HomeController : Controller
     {
     }
 
-    public async Task<IActionResult> Index([FromServices] IObterAnuncioUseCase useCase)
+    public async Task<IActionResult> Index(
+        string? cidade,
+        string? titulo, 
+        int? paginaAtual,
+        [FromServices] IObterAnuncioUseCase useCase)
     {
         AnuncioQuery query = new()
         {
-            Cidade = "",
-            Titulo = "",
-            ItensPorPagina= 2,
-            PaginaAtual = 1
+            Cidade = cidade,
+            Titulo = titulo,
+            ItensPorPagina= 1,
+            PaginaAtual = paginaAtual ?? 1
         };
 
         var response = await useCase.GetAllAsync(query);
-
-        return View(response.anunciosVM);
+        return View(response);
     }
 
     public IActionResult Privacy()

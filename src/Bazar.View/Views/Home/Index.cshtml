@@ -1,6 +1,6 @@
 ﻿@using Bazar.View.Tools.Imagens
 
-@model IEnumerable<Bazar.Application.ViewModel.AnuncioViewModel>
+@model Bazar.Application.Response.ObterAnuncioResponse
 @inject GerenciadorImagens _gerirImagem 
 
 <p>
@@ -9,7 +9,7 @@
 </p>
 
 <ol>
-    @foreach (var anuncio in @Model)
+    @foreach (var anuncio in @Model.anunciosVM)
     {
         <li class="anuncio">
             <div class="wrapper-anuncio">
@@ -24,3 +24,5 @@
         </li>
     }
 </ol>
+
+<partial name="_paginacao" model="Model.Paginacao"/>

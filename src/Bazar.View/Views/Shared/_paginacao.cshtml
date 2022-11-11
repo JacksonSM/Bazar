@@ -1,0 +1,22 @@
+﻿@model Bazar.Application.Response.Paginacao
+
+@{
+    int proximaPagina = @Model.PaginaAtual + 1;
+    int paginaAnterior = @Model.PaginaAtual - 1;
+}
+
+<div id="paginacao">
+    @if(Model.PaginaAtual != 1)
+    {
+        <a asp-action="Index" asp-route-paginaAtual="@paginaAnterior">Voltar</a>
+    }
+
+<div>
+    @Model.PaginaAtual de @Model.TotalPaginas
+</div>
+
+    @if (Model.PaginaAtual != Model.TotalPaginas)
+    {
+        <a asp-action="Index" asp-route-paginaAtual="@proximaPagina">Proxima</a>
+    }
+</div>
