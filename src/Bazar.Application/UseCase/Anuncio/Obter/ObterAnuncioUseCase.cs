@@ -49,4 +49,11 @@ public class ObterAnuncioUseCase : IObterAnuncioUseCase
 
         return _mapper.Map<AnuncioViewModel>(anuncioEntity);
     }
+
+    public async Task<IEnumerable<AnuncioViewModel>> ObterAnuncioUsuario(string id)
+    {
+        var anunciosEntity = await _anuncioRepo.GetByUsuarioId(id);
+
+        return _mapper.Map<List<AnuncioViewModel>>(anunciosEntity);
+    }
 }

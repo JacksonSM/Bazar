@@ -18,10 +18,6 @@ public class AnuncioRepository : IAnuncioRepository
         await _context.Anuncios.AddAsync(anuncio);
         return anuncio;
     }
-    public string? Titulo { get; set; }
-    public string? Cidade { get; set; }
-    public int? PaginaAtual { get; set; }
-    public int? ItensPorPagina { get; set; }
 
     public async Task<(IEnumerable<Anuncio>, int totalAnuncios)> GetAllAsync(
         string? titulo, string? cidade,
@@ -39,12 +35,21 @@ public class AnuncioRepository : IAnuncioRepository
             return (await query.ToListAsync(), query.Count());
         
 
-        var anuncios = await query.Skip((paginaAtual.Value - 1) * itensPorPagina.Value)
-                                  .Take(itensPorPagina.Value).ToListAsync();
+        var anuncios = await query.AsNoTracking()
+                                  .Skip((paginaAtual.Value - 1) * itensPorPagina.Value)
+                                  .Take(itensPorPagina.Value)
+                                  .ToListAsync();
 
-        return (anuncios , query.Count());
+        return (anuncios , query.AsNoTracking().Count());
     }
 
     public async Task<Anuncio> GetByIdAsync(int id) =>
         await _context.Anuncios.FirstOrDefaultAsync(x => x.Id == id);
+
+    public async Task<IEnumerable<Anuncio>> GetByUsuarioId(string usuarioId)
+    {
+        return await _context.Anuncios
+            .AsNoTracking()
+            .Where(x => x.AnuncianteId.Equals(usuarioId)).ToListAsync();
+    }
 }

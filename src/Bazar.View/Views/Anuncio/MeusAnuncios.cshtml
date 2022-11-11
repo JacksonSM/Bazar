@@ -1,15 +1,14 @@
 ﻿@using Bazar.View.Tools.Imagens
 
-@model Bazar.Application.Response.ObterAnuncioResponse
-@inject GerenciadorImagens _gerirImagem 
+@model IEnumerable<Bazar.Application.ViewModel.AnuncioViewModel>
+@inject GerenciadorImagens _gerirImagem
 
-<p>
-    <a asp-controller="Anuncio" asp-action="CriarAnuncio">Anuncie AQUI!</a>
-
-</p>
+<h1>
+    Meus Anuncios
+</h1>
 
 <ol>
-    @foreach (var anuncio in @Model.anunciosVM)
+    @foreach (var anuncio in @Model)
     {
         <li class="anuncio">
             <div class="wrapper-anuncio">
@@ -18,11 +17,10 @@
                     <div class="descricao">
                         <h1 id="titulo"> <a asp-controller="Anuncio" asp-action="AnuncioView" asp-route-anuncioId="@anuncio.Id">@anuncio.Titulo</a></h1>
                         <p id="preco"> @Html.DisplayFor(modelItem => anuncio.Preco)</p>
+                        <button type="button" class="btn btn-danger" asp-controller="Anuncio" asp-action="DeletarAnuncio">Deletar</button>
                     </div>
                 </div>
             </div>
         </li>
     }
 </ol>
-
-<partial name="PartialView/_paginacao" model="Model.Paginacao" />

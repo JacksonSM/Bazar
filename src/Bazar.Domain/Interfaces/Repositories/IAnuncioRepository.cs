@@ -7,4 +7,5 @@ public interface IAnuncioRepository
     Task<(IEnumerable<Anuncio>, int totalAnuncios)> GetAllAsync(string titulo, string cidade,
         int? paginaAtual, int? itensPorPagina);
     Task<Anuncio> GetByIdAsync(int id);
+    Task<IEnumerable<Anuncio>> GetByUsuarioId(string usuarioId);
 }

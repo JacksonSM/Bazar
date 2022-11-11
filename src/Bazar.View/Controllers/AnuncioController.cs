@@ -5,6 +5,7 @@ using Bazar.Domain.Validation;
 using Bazar.View.Tools.Imagens;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Bazar.View.Controllers;
 public class AnuncioController : Controller
@@ -56,8 +57,7 @@ public class AnuncioController : Controller
     [HttpGet]
     public async Task<IActionResult> AnuncioView(
         int anuncioId,
-        [FromServices] IObterAnuncioUseCase useCase,
-        [FromServices] GerenciadorImagens gerirImagens)
+        [FromServices] IObterAnuncioUseCase useCase)
     {
         var anuncio = await useCase.GetByIdAsync(anuncioId);
 
@@ -66,4 +66,21 @@ public class AnuncioController : Controller
 
         return View(anuncio);
     }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> MeusAnuncios(
+    int anuncioId,
+    [FromServices] IObterAnuncioUseCase useCase)
+    {
+        var usuarioLogadoId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        var anuncio = await useCase.ObterAnuncioUsuario(usuarioLogadoId);
+
+        if (anuncio is null)
+            return NotFound();
+
+        return View(anuncio);
+    }
+
 }

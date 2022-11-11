@@ -20,7 +20,7 @@ public class HomeController : Controller
         {
             Cidade = cidade,
             Titulo = titulo,
-            ItensPorPagina= 1,
+            ItensPorPagina= 5,
             PaginaAtual = paginaAtual ?? 1
         };
 
