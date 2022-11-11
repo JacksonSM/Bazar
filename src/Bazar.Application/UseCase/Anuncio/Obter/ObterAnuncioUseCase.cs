@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Bazar.Application.Request;
+using Bazar.Application.Response;
 using Bazar.Application.ViewModel;
 using Bazar.Domain.Interfaces.Repositories;
 
@@ -14,11 +16,31 @@ public class ObterAnuncioUseCase : IObterAnuncioUseCase
         _mapper = mapper;
     }
 
-    public async Task<List<AnuncioViewModel>> GetAllAsync()
+    public async Task<ObterAnuncioResponse> GetAllAsync(AnuncioQuery query)
     {
-        var anunciosEntity = await _anuncioRepo.GetAllAsync();
+        (var anunciosEntity, int totalAnuncios) = await _anuncioRepo.GetAllAsync
+            (
+                titulo: query.Titulo,
+                cidade: query.Cidade,
+                paginaAtual: query.PaginaAtual,
+                itensPorPagina: query.ItensPorPagina
+            );
 
-        return _mapper.Map<List<AnuncioViewModel>>(anunciosEntity);
+        Paginacao paginacao = new()
+        {
+            PaginaAtual = query.PaginaAtual.Value,
+            ItensPorPagina = query.ItensPorPagina.Value,
+            TotalAnuncio = totalAnuncios,
+            TotalPaginas = (totalAnuncios / query.ItensPorPagina.Value)
+        };
+
+        var anunciosVM = _mapper.Map<List<AnuncioViewModel>>(anunciosEntity);
+
+        return new ObterAnuncioResponse
+        {
+            anunciosVM = anunciosVM,
+            Paginacao = paginacao
+        };
     }
 
     public async Task<AnuncioViewModel> GetByIdAsync(int id)

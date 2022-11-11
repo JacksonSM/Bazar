@@ -28,10 +28,10 @@ public class AnuncioViewModel
     [Required(ErrorMessage = "Campo {0} é requerido.")]
     public decimal Preco { get; set; }
 
-    [Ignore]
     public string? NomeAnunciante { get; set; }
-    [Ignore]
+
     public string? AnuncianteId { get; set; }
+    public string? TelefoneAnunciante { get; set; }
 
     public string? ImagemPrincipal { get; set; }
     public string? Imagens { get; set; }
