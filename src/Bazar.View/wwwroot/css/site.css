@@ -22,6 +22,10 @@ ol {
     list-style: none;
 }
 
+#form-pesquisa{
+    width: 60%;
+}
+
 .anuncio {
     margin-top: 30px;
     background-color: #e9dbdb;
