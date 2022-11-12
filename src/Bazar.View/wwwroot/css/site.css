@@ -23,7 +23,16 @@ ol {
 }
 
 #form-pesquisa{
-    width: 60%;
+    width: 40%;
+    height: 26px;
+}
+#form-pesquisa button{
+    height: 26px;
+}
+
+
+.container-fluid {
+    margin: 0 80px;
 }
 
 .anuncio {
@@ -31,6 +40,24 @@ ol {
     background-color: #e9dbdb;
     height: 20%;
 }
+
+#anuncio-preco {
+    margin-left: auto;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#anuncio-anunciante {
+    margin: 10px 0;
+    display: block;
+    left: 50px
+}
+
+#anuncio-cidade {
+    display: inline-block;
+    left: 50px
+}
+
 
 img {
     height: 10vw;
@@ -43,13 +70,13 @@ img {
 
 .descricao h1 {
     margin: 0;
-    font-size: 35px;
+    font-size: 32px;
     display: inline-block;
 }
 
 .descricao h1 a {
     text-decoration: none;
-    color: #000000;
+    color: 	#363636;
 }
 
 .divide-img-descricao {
@@ -66,4 +93,23 @@ img {
 
 #registerSubmit {
     margin-top: 30px;
+}
+
+#paginacao {
+    text-align: center;
+}
+
+#paginacao a{
+    margin: 0 5px;
+}
+
+/* Pagina Meus anuncios*/
+
+#btn-Editar {
+    display: inline-block;
+    margin-left: 200px;
+}
+
+#btn-Deletar {
+    display: inline-block;
 }

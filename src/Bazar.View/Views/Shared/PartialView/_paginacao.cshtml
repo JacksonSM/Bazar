@@ -11,9 +11,9 @@
         <a asp-action="Index" asp-route-paginaAtual="@paginaAnterior">Voltar</a>
     }
 
-<div>
-    @Model.PaginaAtual de @Model.TotalPaginas
-</div>
+
+     @Model.PaginaAtual de @Model.TotalPaginas
+
 
     @if (Model.PaginaAtual != Model.TotalPaginas)
     {

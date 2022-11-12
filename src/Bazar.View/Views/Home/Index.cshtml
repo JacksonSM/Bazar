@@ -4,7 +4,7 @@
 @inject GerenciadorImagens _gerirImagem 
 
 <p>
-    <a asp-controller="Anuncio" asp-action="CriarAnuncio">Anuncie AQUI!</a>
+    <a class="btn btn-dark" asp-controller="Anuncio" asp-action="CriarAnuncio">Anuncie AQUI!</a>
 
 </p>
 
@@ -17,7 +17,9 @@
                     <div class="imagem"><img src="@_gerirImagem.ObterCaminhoImagem(anuncio.ImagemPrincipal)"></div>
                     <div class="descricao">
                         <h1 id="titulo"> <a asp-controller="Anuncio" asp-action="AnuncioView" asp-route-anuncioId="@anuncio.Id">@anuncio.Titulo</a></h1>
-                        <p id="preco"> @Html.DisplayFor(modelItem => anuncio.Preco)</p>
+                        <span id="anuncio-preco"> @Html.DisplayFor(modelItem => anuncio.Preco)</span>
+                        <span id="anuncio-anunciante">Anunciante: @anuncio.NomeAnunciante</span>
+                        <span id="anuncio-cidade">Cidade: @anuncio.Cidade</span>    
                     </div>
                 </div>
             </div>
