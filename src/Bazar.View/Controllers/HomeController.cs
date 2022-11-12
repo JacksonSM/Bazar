@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Bazar.View.Controllers;
 public class HomeController : Controller
 {
-
+    private const int ITENS_POR_PAGINA = 5;
     public HomeController()
     {
     }
@@ -20,17 +20,11 @@ public class HomeController : Controller
         {
             Cidade = cidade,
             Titulo = titulo,
-            ItensPorPagina= 5,
+            ItensPorPagina= ITENS_POR_PAGINA,
             PaginaAtual = paginaAtual ?? 1
         };
 
         var response = await useCase.GetAllAsync(query);
         return View(response);
     }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
 }

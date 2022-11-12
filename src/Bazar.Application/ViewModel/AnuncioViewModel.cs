@@ -6,7 +6,7 @@ namespace Bazar.Application.ViewModel;
 
 public class AnuncioViewModel
 {
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     [DisplayName(displayName: "Título")]
     [Required(ErrorMessage = "Campo {0} é requerido.")]

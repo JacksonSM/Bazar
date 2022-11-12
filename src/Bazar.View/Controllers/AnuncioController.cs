@@ -7,17 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace Bazar.View.Controllers;
+
+[Authorize]
 public class AnuncioController : Controller
 {
     [HttpGet]
-    [Authorize]
     public IActionResult CriarAnuncio()
     {
         return View();
     }
 
     [HttpPost]
-    [Authorize]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CriarAnuncio(
         IFormFile imagemPrincipal,
@@ -54,6 +54,7 @@ public class AnuncioController : Controller
 
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> AnuncioView(
         int anuncioId,
         [FromServices] IObterAnuncioUseCase useCase)
@@ -67,12 +68,11 @@ public class AnuncioController : Controller
     }
 
     [HttpGet]
-    [Authorize]
     public async Task<IActionResult> MeusAnuncios(
     int anuncioId,
     [FromServices] IObterAnuncioUseCase useCase)
     {
-        var usuarioLogadoId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var usuarioLogadoId = ObterUsuarioId();
 
         var anuncio = await useCase.ObterAnuncioUsuario(usuarioLogadoId);
 
@@ -82,14 +82,39 @@ public class AnuncioController : Controller
         return View(anuncio);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Editar(
+    int id,
+    [FromServices] IObterAnuncioUseCase useCase)
+    {
+        var anuncio = await useCase.GetByIdAsync(id);
+
+        if (anuncio is null)
+            return NotFound();
+
+        return View(anuncio);
+    }
+
     [HttpPost]
-    [Authorize]
+    public async Task<IActionResult> Editar(
+        AnuncioViewModel anuncioVM,
+        [FromServices] ICriarAnuncioUseCase service)
+    {
+        await service.AtualizarAnuncioAsync(anuncioVM, ObterUsuarioId());
+
+        return RedirectToAction(nameof(MeusAnuncios));
+    }
+
+    [HttpPost]
     public async Task<IActionResult> DeletarAnuncio(
         int id,
         [FromServices] ICriarAnuncioUseCase service)
     {
-        await service.DeletarAnuncioAsync(id, User.FindFirstValue(ClaimTypes.NameIdentifier));
+        await service.DeletarAnuncioAsync(id, ObterUsuarioId());
 
         return RedirectToAction(nameof(MeusAnuncios));
     }
+
+    private string ObterUsuarioId() =>
+        User.FindFirstValue(ClaimTypes.NameIdentifier);
 }

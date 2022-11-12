@@ -24,6 +24,30 @@ public class CriarAnuncioUseCase : ICriarAnuncioUseCase
         _usuarioLogado = usuarioLogado;
     }
 
+    public async Task AtualizarAnuncioAsync(AnuncioViewModel anuncioVM, string usuarioId)
+    {
+        var anuncioEntity = await _anuncioRepo.GetByIdAsync(anuncioVM.Id);
+
+        if (anuncioEntity == null)
+            throw new HttpRequestException("", null, statusCode: System.Net.HttpStatusCode.NotFound);
+
+        if (!anuncioEntity.AnuncianteId.Equals(usuarioId))
+            throw new HttpRequestException("", null, statusCode: System.Net.HttpStatusCode.Unauthorized);
+
+        anuncioEntity.Atualiza
+            (
+                titulo: anuncioVM.Titulo,
+                descricao: anuncioVM.Descricao,
+                tempoUso: anuncioVM.TempoUso,
+                cidade: anuncioVM.Cidade,
+                preco: anuncioVM.Preco,
+                telefoneAnunciante: anuncioVM.TelefoneAnunciante
+            );
+
+        _anuncioRepo.Update(anuncioEntity);
+        await _uow.CommitAsync();
+    }
+
     public async Task DeletarAnuncioAsync(int anuncioId, string usuarioId)
     {
         var anuncioEntity = await _anuncioRepo.GetByIdAsync(anuncioId);

@@ -13,9 +13,9 @@ public class Anuncio : BaseEntity
     public string ImagemPrincipal { get; private set; } 
     public string Imagens { get; private set; }
 
-    public string NomeAnunciante { get; set; }
-    public string TelefoneAnunciante { get; set; }
-    public string AnuncianteId { get; set; }
+    public string NomeAnunciante { get; private set; }
+    public string TelefoneAnunciante { get; private set; }
+    public string AnuncianteId { get; private set; }
 
     public Anuncio(){}//Para EF
 
@@ -23,7 +23,7 @@ public class Anuncio : BaseEntity
         string cidade, decimal preco, string imagemPrincipal, string imagens,
         string nomeAnunciante, string anuncianteId, string telefoneAnunciante)
     {
-        Validar(titulo, descricao, tempoUso, cidade, preco);
+        Validar(titulo, descricao, tempoUso, cidade, preco, telefoneAnunciante);
 
         Titulo = titulo;
         Descricao = descricao;
@@ -38,8 +38,21 @@ public class Anuncio : BaseEntity
         TelefoneAnunciante = telefoneAnunciante;
     }
 
+    public void Atualiza(string titulo, string descricao, int tempoUso,
+        string cidade, decimal preco, string telefoneAnunciante)
+    {
+        Validar(titulo, descricao, tempoUso, cidade, preco, telefoneAnunciante);
+
+        Titulo = titulo;
+        Descricao = descricao;
+        TempoUso = tempoUso;
+        Cidade = cidade;
+        Preco = preco;
+        TelefoneAnunciante = telefoneAnunciante;
+    }
+
     public void Validar(string titulo, string descricao, int tempoUso,
-        string cidade, decimal preco)
+        string cidade, decimal preco, string telefoneAnunciante)
     {
         DomainExceptionValidation.Quando(string.IsNullOrEmpty(titulo),
         "O campo Titulo é obrigatório");
@@ -50,10 +63,15 @@ public class Anuncio : BaseEntity
         DomainExceptionValidation.Quando(string.IsNullOrEmpty(cidade),
         "O campo Cidade é obrigatório");
 
+        DomainExceptionValidation.Quando(string.IsNullOrEmpty(telefoneAnunciante),
+        "O campo Telefone é obrigatório");
+        //Melhorar validação do telefone
+
         DomainExceptionValidation.Quando(preco < 0, "Preço não pode ser negativo.");
 
         DomainExceptionValidation.Quando(tempoUso < 0, "Tempo de uso não pode ser negativo.");
     }
+
 
     public void DesativarAnuncio()
     {
