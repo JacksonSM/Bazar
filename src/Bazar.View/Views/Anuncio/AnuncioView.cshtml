@@ -39,7 +39,27 @@
     <p>@Model.Descricao</p>
     <p id="cidade_view">Cidade: @Model.Cidade</p>
     <p id="tempouso_view">@Model.TempoUso meses de uso.</p>
-    <button type="button" class="btn btn-primary">Entrar em contato</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalContato">Entrar em contato</button>
 </div>
 
 
+
+<div class="modal fade" id="modalContato">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Contato</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Telefone para contato: @Model.TelefoneAnunciante
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
