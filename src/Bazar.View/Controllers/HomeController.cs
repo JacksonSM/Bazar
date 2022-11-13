@@ -25,6 +25,10 @@ public class HomeController : Controller
         };
 
         var response = await useCase.ObterTodosAsync(query);
+
+        if(response.Paginacao.TotalPaginas < paginaAtual) 
+            return RedirectToAction(nameof(Index));
+
         return View(response);
     }
 }
