@@ -105,8 +105,21 @@ public class AnuncioController : Controller
         return RedirectToAction(nameof(MeusAnuncios));
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> Deletar(
+        int id,
+        [FromServices] IObterAnuncioUseCase useCase)
+    {
+        var anuncio = await useCase.GetByIdAsync(id);
+
+        if (anuncio is null)
+            return NotFound();
+
+        return View(anuncio);
+    }
+
     [HttpPost]
-    public async Task<IActionResult> DeletarAnuncio(
+    public async Task<IActionResult> Deletar(
         int id,
         [FromServices] ICriarAnuncioUseCase service)
     {
