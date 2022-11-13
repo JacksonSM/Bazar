@@ -68,6 +68,11 @@
     
 }
 
+.anuncio-info button{
+    display: inline-block;
+    float: right;
+}
+
 #preco-view {
     display: inline-block;
     font-size: 25px;

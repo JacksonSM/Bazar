@@ -23,7 +23,7 @@ public class AnuncioViewModel
     [Required(ErrorMessage = "Campo {0} é requerido.")]
     public string Cidade { get; set; }
 
-    [DataType(DataType.Currency)]
+    [DisplayFormat(DataFormatString = "{0:C0}")]
     [DisplayName(displayName: "Preço")]
     [Required(ErrorMessage = "Campo {0} é requerido.")]
     public decimal Preco { get; set; }
