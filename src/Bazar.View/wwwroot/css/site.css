@@ -66,6 +66,7 @@ img {
 
 .descricao {
     margin: 0 0 0 10px;
+    width:100%;
 }
 
 .descricao h1 {
@@ -81,6 +82,7 @@ img {
 
 .divide-img-descricao {
     display: flex;
+    width:100%;
 }
 
 .form-group {
@@ -89,6 +91,13 @@ img {
 
 .form-floating {
     margin: 30px 0;
+}
+
+#form-pesquisa{
+    display:flex;
+    align-items:center;
+    gap: .5rem;
+    margin-right:10%;
 }
 
 #registerSubmit {
@@ -112,4 +121,10 @@ img {
 
 #btn-Deletar {
     display: inline-block;
+}
+
+.titulo-preco {
+    width:100%;
+    display: flex;
+    justify-content: space-between;
 }
