@@ -16,8 +16,10 @@
                 <div class="divide-img-descricao">
                     <div class="imagem"><img src="@_gerirImagem.ObterCaminhoImagem(anuncio.ImagemPrincipal)"></div>
                     <div class="descricao">
-                        <h1 id="titulo"> <a asp-controller="Anuncio" asp-action="AnuncioView" asp-route-anuncioId="@anuncio.Id">@anuncio.Titulo</a></h1>
-                        <span id="anuncio-preco"> @Html.DisplayFor(modelItem => anuncio.Preco)</span>
+                        <div class="titulo-preco">
+                            <h1 id="titulo"> <a asp-controller="Anuncio" asp-action="AnuncioView" asp-route-anuncioId="@anuncio.Id">@anuncio.Titulo</a></h1>
+                            <span id="anuncio-preco"> @Html.DisplayFor(modelItem => anuncio.Preco)</span>
+                        </div>
                         <span id="anuncio-anunciante">Anunciante: @anuncio.NomeAnunciante</span>
                         <span id="anuncio-cidade">Cidade: @anuncio.Cidade</span>    
                     </div>
