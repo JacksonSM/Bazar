@@ -27,12 +27,14 @@ public class ObterAnuncioService : IObterAnuncioService
                 itensPorPagina: query.ItensPorPagina
             );
 
+        var totalPaginas = Math.Ceiling(totalAnuncios / (decimal)query.ItensPorPagina.Value);
+
         Paginacao paginacao = new()
         {
             PaginaAtual = query.PaginaAtual.Value,
             ItensPorPagina = query.ItensPorPagina.Value,
             TotalAnuncio = totalAnuncios,
-            TotalPaginas = totalAnuncios / query.ItensPorPagina.Value
+            TotalPaginas = (int) totalPaginas
         };
 
         var anunciosVM = _mapper.Map<List<AnuncioViewModel>>(anunciosEntity);
