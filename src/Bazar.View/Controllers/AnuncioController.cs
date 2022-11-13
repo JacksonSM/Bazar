@@ -1,5 +1,4 @@
-﻿using Bazar.Application.UseCase.Anuncio.Criar;
-using Bazar.Application.UseCase.Anuncio.Obter;
+﻿using Bazar.Application.Services.Anuncio.Contracts;
 using Bazar.Application.ViewModel;
 using Bazar.View.Tools.Imagens;
 using Microsoft.AspNetCore.Authorization;
@@ -23,7 +22,7 @@ public class AnuncioController : Controller
         IFormFile imagemPrincipal,
         IFormFileCollection imagensSegundaria,
         AnuncioViewModel anuncioVM,
-        [FromServices] ICriarAnuncioUseCase criarAnuncioUseCase,
+        [FromServices] IAnuncioService criarAnuncioUseCase,
         [FromServices] GerenciadorImagens gerirImagens)
     {
         if (ModelState.IsValid)
@@ -33,7 +32,7 @@ public class AnuncioController : Controller
                 anuncioVM.ImagemPrincipal = gerirImagens.SalvarImagem(imagemPrincipal);
                 anuncioVM.Imagens = string.Join("," ,gerirImagens.SalvarImagem(imagensSegundaria));
 
-                await criarAnuncioUseCase.ExecuteAsync(anuncioVM);
+                await criarAnuncioUseCase.AdicionarAsync(anuncioVM);
             }
             catch(Exception e) 
             {
@@ -57,9 +56,9 @@ public class AnuncioController : Controller
     [AllowAnonymous]
     public async Task<IActionResult> AnuncioView(
         int anuncioId,
-        [FromServices] IObterAnuncioUseCase useCase)
+        [FromServices] IObterAnuncioService useCase)
     {
-        var anuncio = await useCase.GetByIdAsync(anuncioId);
+        var anuncio = await useCase.ObterPoIdAsync(anuncioId);
 
         if (anuncio is null)
             return NotFound();
@@ -70,11 +69,11 @@ public class AnuncioController : Controller
     [HttpGet]
     public async Task<IActionResult> MeusAnuncios(
     int anuncioId,
-    [FromServices] IObterAnuncioUseCase useCase)
+    [FromServices] IObterAnuncioService useCase)
     {
         var usuarioLogadoId = ObterUsuarioId();
 
-        var anuncio = await useCase.ObterAnuncioUsuario(usuarioLogadoId);
+        var anuncio = await useCase.ObterAnuncioDoUsuarioAsync(usuarioLogadoId);
 
         if (anuncio is null)
             return NotFound();
@@ -85,9 +84,9 @@ public class AnuncioController : Controller
     [HttpGet]
     public async Task<IActionResult> Editar(
     int id,
-    [FromServices] IObterAnuncioUseCase useCase)
+    [FromServices] IObterAnuncioService useCase)
     {
-        var anuncio = await useCase.GetByIdAsync(id);
+        var anuncio = await useCase.ObterPoIdAsync(id);
 
         if (anuncio is null)
             return NotFound();
@@ -98,9 +97,9 @@ public class AnuncioController : Controller
     [HttpPost]
     public async Task<IActionResult> Editar(
         AnuncioViewModel anuncioVM,
-        [FromServices] ICriarAnuncioUseCase service)
+        [FromServices] IAnuncioService service)
     {
-        await service.AtualizarAnuncioAsync(anuncioVM, ObterUsuarioId());
+        await service.AtualizarAsync(anuncioVM, ObterUsuarioId());
 
         return RedirectToAction(nameof(MeusAnuncios));
     }
@@ -108,9 +107,9 @@ public class AnuncioController : Controller
     [HttpGet("{id}")]
     public async Task<IActionResult> Deletar(
         int id,
-        [FromServices] IObterAnuncioUseCase useCase)
+        [FromServices] IObterAnuncioService useCase)
     {
-        var anuncio = await useCase.GetByIdAsync(id);
+        var anuncio = await useCase.ObterPoIdAsync(id);
 
         if (anuncio is null)
             return NotFound();
@@ -121,9 +120,9 @@ public class AnuncioController : Controller
     [HttpPost]
     public async Task<IActionResult> Deletar(
         int id,
-        [FromServices] ICriarAnuncioUseCase service)
+        [FromServices] IAnuncioService service)
     {
-        await service.DeletarAnuncioAsync(id, ObterUsuarioId());
+        await service.DeletarAsync(id, ObterUsuarioId());
 
         return RedirectToAction(nameof(MeusAnuncios));
     }

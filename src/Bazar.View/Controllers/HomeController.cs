@@ -1,5 +1,5 @@
 ﻿using Bazar.Application.Request;
-using Bazar.Application.UseCase.Anuncio.Obter;
+using Bazar.Application.Services.Anuncio.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bazar.View.Controllers;
@@ -14,9 +14,9 @@ public class HomeController : Controller
         string? cidade,
         string? titulo, 
         int? paginaAtual,
-        [FromServices] IObterAnuncioUseCase useCase)
+        [FromServices] IObterAnuncioService useCase)
     {
-        AnuncioQuery query = new()
+        ObterAnuncioRequest query = new()
         {
             Cidade = cidade,
             Titulo = titulo,
@@ -24,7 +24,7 @@ public class HomeController : Controller
             PaginaAtual = paginaAtual ?? 1
         };
 
-        var response = await useCase.GetAllAsync(query);
+        var response = await useCase.ObterTodosAsync(query);
         return View(response);
     }
 }

@@ -2,7 +2,7 @@
 using Bazar.Application.ViewModel;
 using Bazar.Domain.Entities;
 
-namespace Bazar.Application.Services.Mappings;
+namespace Bazar.Application.Tools.Mappings;
 public class MapperConfig : Profile
 {
     public MapperConfig()

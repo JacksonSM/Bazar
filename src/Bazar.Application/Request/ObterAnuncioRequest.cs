@@ -1,5 +1,5 @@
 ﻿namespace Bazar.Application.Request;
-public class AnuncioQuery
+public class ObterAnuncioRequest
 {
     public string? Titulo { get; set; }
     public string? Cidade { get; set; }

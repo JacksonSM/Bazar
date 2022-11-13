@@ -1,18 +1,19 @@
 ﻿using AutoMapper;
+using Bazar.Application.Services.Anuncio.Contracts;
 using Bazar.Application.ViewModel;
 using Bazar.Domain.Account;
 using Bazar.Domain.Interfaces;
 using Bazar.Domain.Interfaces.Repositories;
 
-namespace Bazar.Application.UseCase.Anuncio.Criar;
-public class CriarAnuncioUseCase : ICriarAnuncioUseCase
+namespace Bazar.Application.Services.Anuncio;
+public class AnuncioService : IAnuncioService
 {
     private readonly IUsuarioLogado _usuarioLogado;
     private readonly IAnuncioRepository _anuncioRepo;
     private readonly IUnitOfWork _uow;
     private readonly IMapper _mapper;
 
-    public CriarAnuncioUseCase(
+    public AnuncioService(
         IUsuarioLogado usuarioLogado,
         IAnuncioRepository anuncioRepo,
         IUnitOfWork uow,
@@ -24,7 +25,7 @@ public class CriarAnuncioUseCase : ICriarAnuncioUseCase
         _usuarioLogado = usuarioLogado;
     }
 
-    public async Task AtualizarAnuncioAsync(AnuncioViewModel anuncioVM, string usuarioId)
+    public async Task AtualizarAsync(AnuncioViewModel anuncioVM, string usuarioId)
     {
         var anuncioEntity = await _anuncioRepo.GetByIdAsync(anuncioVM.Id);
 
@@ -48,14 +49,14 @@ public class CriarAnuncioUseCase : ICriarAnuncioUseCase
         await _uow.CommitAsync();
     }
 
-    public async Task DeletarAnuncioAsync(int anuncioId, string usuarioId)
+    public async Task DeletarAsync(int anuncioId, string usuarioId)
     {
         var anuncioEntity = await _anuncioRepo.GetByIdAsync(anuncioId);
 
         if (anuncioEntity == null)
             throw new HttpRequestException("", null, statusCode: System.Net.HttpStatusCode.NotFound);
-        
-        if(!anuncioEntity.AnuncianteId.Equals(usuarioId))
+
+        if (!anuncioEntity.AnuncianteId.Equals(usuarioId))
             throw new HttpRequestException("", null, statusCode: System.Net.HttpStatusCode.Unauthorized);
 
         anuncioEntity.DesativarAnuncio();
@@ -63,7 +64,7 @@ public class CriarAnuncioUseCase : ICriarAnuncioUseCase
         await _uow.CommitAsync();
     }
 
-    public async Task<AnuncioViewModel> ExecuteAsync(AnuncioViewModel model)
+    public async Task<AnuncioViewModel> AdicionarAsync(AnuncioViewModel model)
     {
         string nomeCompletoUsuarioLogado = await _usuarioLogado.ObterUsuarioNomeCompletoAsync();
         string idUsuarioLogado = _usuarioLogado.ObterUsuarioId();
