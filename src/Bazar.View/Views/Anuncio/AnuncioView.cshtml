@@ -4,6 +4,7 @@
 @inject GerenciadorImagens _gerirImagem
 
 @{
+    
     var nomeImagensSegundaria = Model.ObterImagens();
     List<string> imagensPath = new();
 
@@ -17,19 +18,28 @@
 
 <ul class="slider">
     <li>
-        <input type="radio" id="slide1" name="slide" checked>
-        <label for="slide1"></label>
+        <input type="radio" id="slide0" name="slide" checked>
+        <label for="slide0"></label>
+       
         <img src="@_gerirImagem.ObterCaminhoImagem(@Model.ImagemPrincipal)" />
     </li>
-    @for (int x = 0; x < imagensPath.Count; x++)
+    
+    @{
+     
+        
+         for (int x = 0; x < imagensPath.Count; x++)
     {
         <li>
             <input type="radio" id="slide(@x)" name="slide">
-            <label for="slide(@x)"></label>
+            <label for="slide()" style="border:1px solid blue;"></label>
+            <input type="radio" id="slide(@x)" name="slide" >
+            <label for="slide(1)" style="border:1px solid red;"></label>
             <img src="@imagensPath[x]" />
         </li>
         
     }
+    }
+   
 </ul>
 
 <div class="anuncio-info">
